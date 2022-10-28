@@ -14,6 +14,7 @@ function PlayBar(props) {
     const [playedPercentage, setPlayedPercentage] = useState(33);
     const [currentTime, setCurrentTime] = useState("1:00");
     const [duration, setDuration] = useState("3:00");
+    const [volume, setVolume] = useState(50);
 
     return (
         <div className="playbar">
@@ -47,7 +48,20 @@ function PlayBar(props) {
                 </div>
             </div>
             <div className="playbarRight">
-
+                <div className="volumeText">
+                    <p>Volume</p>
+                    <p className="volumePerc">{volume}%</p>
+                </div>
+                <div className="volumeBarContainer">
+                    <div className="volumeBarFill">
+                        <div className="volumeBar" style={{
+                            width: `${volume}%`,
+                        }}></div>
+                        <div className="volumeBarHandle" style={{
+                            bottom: `calc(${volume}% + 15px)`,
+                        }}></div>
+                    </div>
+                </div>
             </div>
         </div>
     );
