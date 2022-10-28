@@ -1,66 +1,8 @@
-.nav {
-    position: sticky;
-    top: 0;
-    left: 0;
-    z-index: 100;
+.app {
     width: 100%;
-    height: 50px;
-    background-color: #5B283A;
-
-    display: flex;
-    justify-content: left;
-    align-items: center;
-}
-
-.nav .navButton {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: fit-content;
-    height: 50px;
-    padding: 0 40px;
-    cursor: pointer;
-    background-color: #682F43;
-    transition: 0.2s ease-in-out;
-}
-
-.nav .navButton:hover {
-    background-color: #6c3448;
-}
-
-.nav .navButton.active {
-    background-color: #803C54;
-}
-
-.nav .navButton .navIcon {
-    width: 20px;
-    height: 20px;
-    margin-right: 10px;
-}
-
-.nav .navButton.right {
-    /* flex to the right of navbar */
-    margin-left: auto;
-}
-
-.nav .title {
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
-    font-size: 1.5rem;
-    font-weight: 200;
-    top: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 50px;
-    text-transform: uppercase;
-    letter-spacing: 2px;
-    opacity: 0.75;
-}
-
-.nav .title .titleIcon {
-    width: 30px;
-    height: 30px;
-    margin: 0 10px;
+    height: 100vh;
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 50px auto 100px;
 }
