@@ -105,6 +105,7 @@
     background-color: #0F100E;
     border-radius: 5px;
     position: relative;
+    cursor: pointer;
 }
 
 .playbar .playbarCenter .progress .progressBarContainer .progressBarFill .progressBar {

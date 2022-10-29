@@ -17,18 +17,18 @@ function PlayBar(props) {
     const [volume, setVolume] = useState(50);
 
     function updatePlayedPercentage(e) {
+        // print element class
         // get the mouse position
         const mousePosition = e.clientX;
 
-        // get the playbar position
-        const playbarPosition = e.target.getBoundingClientRect();
+        // get the playbar position (must be .progressBarFill class)
+        let closestElement = e.target.closest(".progressBarFill");
+        const playbarPosition = closestElement.getBoundingClientRect();
         const left = playbarPosition.left;
         const right = playbarPosition.left + playbarPosition.width;
 
         // calculate the percentage
         const percentage = (mousePosition - left) / (right - left);
-        
-        console.log(`${Math.round(left)} ${Math.round(mousePosition)} ${Math.round(right)}: ${Math.round(percentage * 100)}`);
 
         // update the state
         setPlayedPercentage(percentage * 100);
