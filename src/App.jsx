@@ -32,7 +32,9 @@ function App() {
 
     return (
         <div className="app">
-            <NavigationBar onButtonClick={navigationButtonClick}/>
+            <NavigationBar 
+                onButtonClick={navigationButtonClick}
+            />
             {renderPage()}
             <PlayBar />
         </div>

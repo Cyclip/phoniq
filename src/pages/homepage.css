@@ -1,9 +1,157 @@
+.homePage input {
+    background-color: #3A1923;
+    color: white;
+    border: none;
+    outline: none;
+    font-family: 'Inter', sans-serif;
+    padding: 10px 15px;
+    border-radius: 15px;
+    height: 20px;
+    transition: 0.2s ease;
+}
+  
+.homePage input:focus {
+    background-color: #4A1A23;
+}
+  
+.homePage input::placeholder {
+    color: rgba(255, 255, 255, 0.5);
+}
+  
+.homePage button {
+    background-color: #5B283A;
+    color: white;
+    border: none;
+    outline: none;
+    font-family: 'Inter', sans-serif;
+    padding: 10px 15px;
+    border-radius: 15px;
+    cursor: pointer;
+    transition: 0.2s ease;
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+  
+.homePage button:hover {
+    background-color: #6B2A3A;
+}
+  
+.homePage button:active {
+    background-color: #7B2B3A;
+}
+  
+.homePage button:focus {
+    background-color: #6B2A3A;
+}
+  
+.homePage button:disabled {
+    background-color: #3A1923;
+    cursor: not-allowed;
+}
+  
+.homePage button .icon {
+    width: 20px;
+    height: 20px;
+    margin-right: 5px;
+}
+
 .homePage {
-    padding: 50px;
+    padding: 25px;
     box-sizing: border-box;
 
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    
+    grid-template-columns: 1fr 1fr;   
+}
+
+.homePage .section {
+    height: 100%;
+    width: 100%;
+}
+
+.homePage .section .sectionContent {
+    height: 100%;
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.homePage .section h1 {
+    font-size: 2.5em;
+    text-align: center;
+    padding-bottom: 10px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    width: 100%;
+    font-weight: 600;
+}
+
+.searchBar {
+    width: 100%;
+    padding: 0 10px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.searchBar input {
+    flex: 5;
+}
+
+.searchBar button {
+    flex: 1;
+    font-size: 1em;
+}
+
+.searchSongList {
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px;
+}
+
+.searchSongList .songItem {
+    padding: 15px 10px;
+    background-color: #18040A;
+    display: flex;
+    justify-content: space-between;
+}
+
+.searchSongList .songItem:nth-child(2n) {
+    background-color: #22060E;
+}
+
+.searchSongList .songItem .songItemButton {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    background-color: transparent;
+}
+
+.searchSongList .songItem .songItemButton .icon {
+    width: 30px;
+    height: 30px;
+    opacity: 0.6;
+    transition: 0.2s ease;
+}
+
+.searchSongList .songItem .songItemButton:hover .icon {
+    opacity: 1;
+}
+
+.searchSongList .noSongsMsg {
+    text-align: center;
+    padding: 80px 20px;
+    font-size: 1em;
+    font-weight: 100;
+    opacity: 0.3;
+}
+
+.searchSongList .noSongsMsg p:first-child {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+    font-weight: 200;
 }
