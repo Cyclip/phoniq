@@ -15,9 +15,9 @@ function PlayBar(props) {
     const [currentTime, setCurrentTime] = useState("1:00");
     const [duration, setDuration] = useState("3:00");
     const [volume, setVolume] = useState(50);
+    
 
     function updatePlayedPercentage(e) {
-        // print element class
         // get the mouse position
         const mousePosition = e.clientX;
 
@@ -25,7 +25,7 @@ function PlayBar(props) {
         let closestElement = e.target.closest(".progressBarFill");
         const playbarPosition = closestElement.getBoundingClientRect();
         const left = playbarPosition.left;
-        const right = playbarPosition.left + playbarPosition.width;
+        const right = playbarPosition.right;
 
         // calculate the percentage
         const percentage = (mousePosition - left) / (right - left);
@@ -35,7 +35,19 @@ function PlayBar(props) {
     }
 
     function updateVolume(e) {
-        setVolume(e.target.value);
+        // get the mouse position
+        const mousePosition = e.clientY;
+
+        let closestElement = e.target.closest(".volumeBarFill");
+        const playbarPosition = closestElement.getBoundingClientRect();
+        const bottom = playbarPosition.bottom;
+        const top = playbarPosition.top;
+
+        // calculate the percentage
+        const percentage = (mousePosition - bottom) / (top - bottom);
+
+        // update the state
+        setVolume(percentage * 100);
     }
 
     return (
@@ -55,9 +67,9 @@ function PlayBar(props) {
                     </button>
                 </div>
                 <div className="progress">
-                    <div className="progressBarContainer">
-                        <p className="progressBarText">{currentTime}</p>
-                        <div className="progressBarFill"
+                    <div className="progressBarContainer pb-container">
+                        <p className="progressBarText pb-text">{currentTime}</p>
+                        <div className="progressBarFill pb-fill"
                             onMouseDown={updatePlayedPercentage}
                             onMouseMove={(e) => {
                                 if (e.buttons === 1) {
@@ -68,7 +80,7 @@ function PlayBar(props) {
                             <div className="progressBar" style={{
                                 width: `${playedPercentage}%`,
                             }}></div>
-                            <div className="progressBarHandle" style={{
+                            <div className="progressBarHandle pb-handle" style={{
                                 left: `calc(${playedPercentage}% - 10px)`,
                             }}></div>
                         </div>
@@ -77,11 +89,11 @@ function PlayBar(props) {
                 </div>
             </div>
             <div className="playbarRight">
-                <div className="volumeText">
+                <div className="volumeText pb-text">
                     <p>Volume</p>
                     <p className="volumePerc">{Math.round(volume)}%</p>
                 </div>
-                <div className="volumeBarContainer"
+                <div className="volumeBarContainer  pb-container"
                     onMouseDown={updateVolume}
                     onMouseMove={(e) => {
                         if (e.buttons === 1) {
@@ -89,11 +101,11 @@ function PlayBar(props) {
                         }
                     }}
                 >
-                    <div className="volumeBarFill">
+                    <div className="volumeBarFill pb-fill">
                         <div className="volumeBar" style={{
-                            width: `${volume}%`,
+                            height: `${volume}%`,
                         }}></div>
-                        <div className="volumeBarHandle" style={{
+                        <div className="volumeBarHandle pb-handle" style={{
                             bottom: `calc(${volume}% - 10px)`,
                         }}></div>
                     </div>

@@ -71,6 +71,33 @@
     transform: scale(1.2);
 }
 
+.pb-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+    cursor: pointer;
+}
+
+.pb-handle {
+    width: 15px;
+    height: 15px;
+    background-color: #be8498;
+    border-radius: 50%;
+    /* glow */
+    filter: drop-shadow(0 0 5px #ecb1bc87);
+    opacity: 0.5;
+    transform: scale(0.8);
+    transition: 0.2s ease;
+}
+
+.pb-handle:hover {
+    opacity: 1;
+    transform: scale(1);
+}
+
 .playbar .playbarCenter .progress {
     width: 100%;
     height: 7px;
@@ -97,6 +124,7 @@
     align-items: center;
     justify-content: center;
     gap: 8px;
+    transition: 0.2s ease;
 }
 
 .playbar .playbarCenter .progress .progressBarContainer .progressBarFill {
@@ -106,6 +134,7 @@
     border-radius: 5px;
     position: relative;
     cursor: pointer;
+    transition: 0.2s ease;
 }
 
 .playbar .playbarCenter .progress .progressBarContainer .progressBarFill .progressBar {
@@ -122,13 +151,15 @@
     position: absolute;
     left: calc(10% - 10px);
     top: -4px;
-    width: 15px;
-    height: 15px;
-    background-color: #be8498;
-    border-radius: 50%;
-    /* glow */
-    filter: drop-shadow(0 0 5px #ecb1bc87);
-    transition: 0.2s ease;
+}
+
+.playbar .playbarCenter .progress .progressBarContainer:hover {height: 10px;}
+.playbar .playbarCenter .progress .progressBarContainer:hover .progressBarFill {height: 10px;}
+.playbar .playbarCenter .progress .progressBarContainer:hover .progressBarHandle {top: -3px;}
+
+.pb-container:hover .pb-fill .pb-handle {
+    opacity: 1;
+    transform: scale(1);
 }
 
 /* volume */
@@ -174,21 +205,27 @@
 
 .playbarRight .volumeBarContainer .volumeBarFill {
     width: 100%;
-    height: 50%;
+    height: 100%;
     border-radius: 5px;
     position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    background-color: #0F100E;
+}
+
+.playbarRight .volumeBarContainer .volumeBarFill .volumeBar {
+    width: 100%;
+    height: 100%;
     background-color: #B2768B;
+    border-radius: 5px;
+    /* glow */
+    filter: drop-shadow(0 0 5px #ecb1bc87);
+    transition: 0.2s ease;
 }
 
 .playbarRight .volumeBarContainer .volumeBarHandle {
     position: absolute;
     right: -3.5px;
     bottom: 0;
-    width: 15px;
-    height: 15px;
-    background-color: #be8498;
-    border-radius: 50%;
-    /* glow */
-    filter: drop-shadow(0 0 5px #ecb1bc87);
-    transition: 0.2s ease;
 }
