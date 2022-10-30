@@ -82,3 +82,25 @@ input[type="range"]::-ms-fill-lower {
   border-radius:30px;
   border:none;
 }
+
+/* ===== Scrollbar CSS ===== */
+  /* Firefox */
+  * {
+    scrollbar-width: auto;
+    scrollbar-color: #845264 #2d0b15;
+  }
+
+  /* Chrome, Edge, and Safari */
+  *::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  *::-webkit-scrollbar-track {
+    background: #2d0b15;
+  }
+
+  *::-webkit-scrollbar-thumb {
+    background-color: #845264;
+    border-radius: 10px;
+    border: 0px solid #ffffff;
+  }

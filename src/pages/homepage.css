@@ -112,33 +112,39 @@
     margin-top: 20px;
 }
 
-.searchSongList .songItem {
+.songItem {
     padding: 15px 10px;
     background-color: #18040A;
     display: flex;
     justify-content: space-between;
 }
 
-.searchSongList .songItem:nth-child(2n) {
+.songItem:nth-child(2n) {
     background-color: #22060E;
 }
 
-.searchSongList .songItem .songItemButton {
+.songItem .songItemButton {
     display: flex;
     justify-content: center;
     align-items: center;
     gap: 10px;
     background-color: transparent;
+    transition: 0.2s ease;
 }
 
-.searchSongList .songItem .songItemButton .icon {
+.songItem .songItemButton .icon {
     width: 30px;
     height: 30px;
     opacity: 0.6;
     transition: 0.2s ease;
 }
 
-.searchSongList .songItem .songItemButton:hover .icon {
+.songItem .songItemButton:hover {
+    background-color: transparent;
+    transition: 0.2s ease;
+}
+
+.songItem .songItemButton:hover .icon {
     opacity: 1;
 }
 
@@ -154,4 +160,12 @@
     font-size: 1.5em;
     margin-bottom: 10px;
     font-weight: 200;
+}
+
+/* Recently Played Section */
+.recentlyPlayed .sectionContent .subtitle {
+    padding: 10px 0;
+    font-weight: 100;
+    font-size: 1em;
+    opacity: 0.9;
 }

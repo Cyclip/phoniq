@@ -72,12 +72,8 @@
 }
 
 /* Playable song */
-.song.playable {
+.song.playable .songImage {
     cursor: pointer;
-}
-
-.song.playable:hover .songImage img {
-    filter: brightness(0.8);
 }
 
 /* Display play button over songImage */
@@ -95,6 +91,10 @@
     color: rgb(109, 225, 105);
     opacity: 0;
     transition: 0.2s ease-in-out;
+}
+
+.song.playable .songImage:hover img {
+    filter: brightness(0.8);
 }
 
 .song.playable .songImage:hover .songPlayIcon {
