@@ -3,9 +3,8 @@ import "./css/App.css";
 
 import NavigationBar from "./components/NavigationBar";
 import PlayBar from "./components/PlayBar";
-
 import HomePage from "./pages/HomePage";
-
+import ErrorPage from "./pages/ErrorPage";
 
 function App() {
     const [page, setPage] = useState("home");
@@ -13,7 +12,19 @@ function App() {
     // navigationButtonClick handler
     const navigationButtonClick = (page) => {
         return () => {
-            setPage(page);
+            switch (page) {
+                case "home":
+                    setPage("home");
+                    break;
+                case "playlists":
+                    // open playlists sidebar
+                    break;
+                case "settings":
+                    setPage("settings");
+                    break;
+                default:
+                    setPage("404");
+            }
         }
     }
 
@@ -26,7 +37,9 @@ function App() {
             case "settings":
                 return <p>Settings unimplemented</p>;
             default:
-                return <p>404 unimplemented</p>;
+                return <ErrorPage
+                    pageName={page}
+                />;
         }
     }
 
