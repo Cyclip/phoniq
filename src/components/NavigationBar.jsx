@@ -13,12 +13,16 @@ import "./navigationbar.css";
 function NavigationBar(props) {
     return (
         <div className="nav">
-            <div className="navButton" onClick={props.onButtonClick("home")}>
+            <div className={
+                "navButton" + ((props.activePage == "home" && !props.playlistsOpen) ? " active" : "")
+            } onClick={props.onButtonClick("home")}>
                 <HomeModernIcon className="navIcon" />
                 <p className="navText">Home</p>
             </div>
 
-            <div className="navButton" onClick={props.onButtonClick("playlists")}>
+            <div className={
+                "navButton" + (props.playlistsOpen ? " active" : "")
+            } onClick={props.onButtonClick("playlists")}>
                 <svg className="navIcon" width="34" height="34" viewBox="0 0 34 34" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <circle cx="19.8333" cy="24.0833" r="4.25" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
                     <path d="M24.0833 24.0833V5.66667H29.75" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
@@ -29,7 +33,9 @@ function NavigationBar(props) {
                 <p className="navText">Playlists</p>
             </div>
 
-            <div className="navButton right" onClick={props.onButtonClick("settings")}>
+            <div className={
+                "navButton right" + ((props.activePage == "settings" && !props.playlistsOpen) ? " active" : "")
+            } onClick={props.onButtonClick("settings")}>
                 <Cog6ToothIcon className="navIcon" />
                 <p className="navText">Settings</p>
             </div>

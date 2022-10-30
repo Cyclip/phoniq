@@ -13,73 +13,25 @@ import {
 
 function HomePage() {
     const [songs, setSongs] = useState([
-        {
-            title: "Song Title",
-            artist: "Artist Name",
-            image: "https://via.placeholder.com/150",
-            description: "Song description woohoo",
-            id: "song-id",
-            duration: "3:00",
-        },
-        {
-            title: "Song Title 2",
-            artist: "Artist Name",
-            image: "https://via.placeholder.com/150",
-            description: "Song description woohoo",
-            id: "song-id2",
-            duration: "2:00",
-        },
+        // {
+        //     title: "Song Title",
+        //     artist: "Artist Name",
+        //     image: "https://via.placeholder.com/150",
+        //     description: "Song description woohoo",
+        //     id: "song-id",
+        //     duration: "3:00",
+        // },
     ]);
 
     const [recentlyPlayed, setRecentlyPlayed] = useState([
-        {
-            title: "Song Title",
-            artist: "Artist Name",
-            image: "https://via.placeholder.com/150",
-            description: "Song description woohoo",
-            id: "song-id",
-            duration: "3:00",
-        },
-        {
-            title: "Song Title",
-            artist: "Artist Name",
-            image: "https://via.placeholder.com/150",
-            description: "Song description woohoo",
-            id: "song-id",
-            duration: "3:00",
-        },
-        {
-            title: "Song Title",
-            artist: "Artist Name",
-            image: "https://via.placeholder.com/150",
-            description: "Song description woohoo",
-            id: "song-id",
-            duration: "3:00",
-        },
-        {
-            title: "Song Title",
-            artist: "Artist Name",
-            image: "https://via.placeholder.com/150",
-            description: "Song description woohoo",
-            id: "song-id",
-            duration: "3:00",
-        },
-        {
-            title: "Song Title",
-            artist: "Artist Name",
-            image: "https://via.placeholder.com/150",
-            description: "Song description woohoo",
-            id: "song-id",
-            duration: "3:00",
-        },
-        {
-            title: "Song Title",
-            artist: "Artist Name",
-            image: "https://via.placeholder.com/150",
-            description: "Song description woohoo",
-            id: "song-id",
-            duration: "3:00",
-        },
+        // {
+        //     title: "Song Title",
+        //     artist: "Artist Name",
+        //     image: "https://via.placeholder.com/150",
+        //     description: "Song description woohoo",
+        //     id: "song-id",
+        //     duration: "3:00",
+        // },
         
     ]);
 
