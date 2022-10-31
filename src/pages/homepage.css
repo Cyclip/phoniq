@@ -18,7 +18,7 @@
     color: rgba(255, 255, 255, 0.5);
 }
   
-.homePage button {
+.searchBarButton {
     background-color: #5B283A;
     color: white;
     border: none;
@@ -34,24 +34,24 @@
     align-items: center;
 }
   
-.homePage button:hover {
+.searchBarButton:hover {
     background-color: #6B2A3A;
 }
   
-.homePage button:active {
+.searchBarButton:active {
     background-color: #7B2B3A;
 }
   
-.homePage button:focus {
+.searchBarButton:focus {
     background-color: #6B2A3A;
 }
   
-.homePage button:disabled {
+.searchBarButton:disabled {
     background-color: #3A1923;
     cursor: not-allowed;
 }
   
-.homePage button .icon {
+.searchBarButton .icon {
     width: 20px;
     height: 20px;
     margin-right: 5px;
@@ -130,6 +130,14 @@
     gap: 10px;
     background-color: transparent;
     transition: 0.2s ease;
+
+    color: white;
+    border: none;
+    outline: none;
+    font-family: 'Inter', sans-serif;
+    padding: 10px 15px;
+    border-radius: 15px;
+    cursor: pointer;
 }
 
 .songItem .songItemButton .icon {
