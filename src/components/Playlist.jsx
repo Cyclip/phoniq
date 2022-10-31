@@ -7,9 +7,9 @@ function Playlist(props) {
         <div className="playlist">
             <img src={props.image} alt="Playlist cover" />
             <div className="playlistInfo">
-                <h3>{props.name}</h3>
-                <p>{props.numSongs} songs</p>
-                <p>{props.duration}</p>
+                <h3 className="ellipsis">{props.name}</h3>
+                <p className="ellipsis">{props.numSongs} songs</p>
+                <p className="ellipsis">{props.duration}</p>
             </div>
         </div>
     )

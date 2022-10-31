@@ -25,7 +25,6 @@ Track: #B2768B
 
 /* change background color of input range */
 input[type=range] {
-  -webkit-appearance: none;
   width: 100%;
   height: 7px;
   background-color: transparent;
@@ -51,7 +50,6 @@ input[type=range]::-webkit-slider-thumb {
   background-color: #B2768B;
   position: relative;
   cursor: pointer;
-  -webkit-appearance: none;
   margin-top: -2px;
   /* glow */
   filter: drop-shadow(0 0 5px #ecb1bc87);
@@ -104,3 +102,11 @@ input[type="range"]::-ms-fill-lower {
     border-radius: 10px;
     border: 0px solid #ffffff;
   }
+
+
+/* Text ellipsis */
+.ellipsis {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

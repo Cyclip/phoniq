@@ -94,6 +94,11 @@ button {
     cursor: pointer;
 }
 
+/* when pb-container is being dragged */
+.pb-container:hover {
+    cursor: grabbing;
+}
+
 .pb-handle {
     width: 15px;
     height: 15px;

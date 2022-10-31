@@ -1,7 +1,5 @@
 import { useState, useReducer } from "react";
-
 import "./playbar.css";
-
 import Song from "./Song";
 
 import {
@@ -10,6 +8,8 @@ import {
     HeartIcon,
     PauseIcon,
 } from "@heroicons/react/24/solid";
+
+import debounce from "debounce";
 
 function PlayBar(props) {
     const [isPlaying, setIsPlaying] = useState(false);
@@ -31,9 +31,14 @@ function PlayBar(props) {
         // id: "song-id",
     });
 
-    const [_, forceUpdate] = useReducer((x) => x + 1, 0);
+    const updatePlayedPercentage = debounce(
+        debouncedUpdatePlayedPercentage,
+        7,
+    );
 
-    function updatePlayedPercentage(e) {
+    const updateVolume = debounce(debouncedUpdateVolume, 7);
+
+    function debouncedUpdatePlayedPercentage(e) {
         // get the mouse position
         const mousePosition = e.clientX;
 
@@ -44,14 +49,16 @@ function PlayBar(props) {
         const right = playbarPosition.right;
 
         // calculate the percentage
-        const percentage = (mousePosition - left) / (right - left);
+        const percentage = (mousePosition - left) / (right - left) * 100;
 
         // update the state
-        setPlayedPercentage(percentage * 100);
-        forceUpdate();
+        // make sure difference between percentage and playedPercentage is greater than 1
+        if (Math.abs(percentage - playedPercentage) > 1) {
+            setPlayedPercentage(percentage);
+        }
     }
 
-    function updateVolume(e) {
+    function debouncedUpdateVolume(e) {
         // get the mouse position
         const mousePosition = e.clientY;
 
@@ -61,11 +68,11 @@ function PlayBar(props) {
         const top = playbarPosition.top;
 
         // calculate the percentage
-        const percentage = (mousePosition - bottom) / (top - bottom);
+        const percentage = (mousePosition - bottom) / (top - bottom) * 100;
 
         // update the state
-        setVolume(percentage * 100);
-        forceUpdate();
+        // this is a rapid change and it may not update immediately
+        setVolume(percentage);
     }
 
     function onPlayPauseClick() {
