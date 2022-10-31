@@ -80,13 +80,13 @@
 }
 
 .playlistItem.createNew .playlist .empty {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
     object-fit: cover;
     border-radius: 10px;
     overflow: hidden;
     flex-shrink: 0;
-    padding: 20px;
+    padding: 10px;
     box-sizing: border-box;
     border: 5px solid #B2768B;
     transition: 0.2s ease;

@@ -1,3 +1,8 @@
+:root {
+    /* size */
+    --playlist-size: 80px;
+}
+
 .playlist {
     display: flex;
     justify-content: left;
@@ -6,8 +11,8 @@
 }
 
 .playlist img {
-    width: 100px;
-    height: 100px;
+    width: var(--playlist-size);
+    height: var(--playlist-size);
     object-fit: cover;
     border-radius: 10px;
     overflow: hidden;
@@ -26,12 +31,12 @@
 
 .playlist .playlistInfo h3 {
     font-weight: 400;
-    font-size: 1.5rem;
-    margin-bottom: 10px;
+    font-size: 1.2rem;
+    margin-bottom: 5px;
 }
 
 .playlist .playlistInfo p {
     opacity: 0.7;
-    font-size: 1rem;
+    font-size: 0.9rem;
     font-weight: 100;
 }

@@ -44,6 +44,7 @@ function App() {
     const onPlaylistSelect = (playlist) => {
         return () => {
             console.log(playlist);
+            setPage("playlist");
         }
     }
 

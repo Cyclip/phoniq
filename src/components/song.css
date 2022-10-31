@@ -1,3 +1,8 @@
+:root {
+    /* size */
+    --song-size: 80px;
+}
+
 .song {
     display: flex;
     align-items: center;
@@ -7,8 +12,8 @@
 }
 
 .song .songImage {
-    width: 125px;
-    height: 125px;
+    width: var(--song-size);
+    height: var(--song-size);
     border-radius: 20px;
     overflow: hidden;
     background-color: #D19EA7;
@@ -33,12 +38,12 @@
 
 .song .songInfo {
     width: 100%;
-    height: 125px;
+    height: var(--song-size);
     display: flex;
     align-items: left;
     justify-content: left;
     flex-direction: column;
-    padding: 10px 0;
+    padding: 5px 0;
     box-sizing: border-box;
 }
 
@@ -49,9 +54,8 @@
 .song .songInfo .songArtist {
     color: white;
     opacity: 0.6;
-    font-size: 1rem;
+    font-size: 0.8rem;
     font-weight: 100;
-    margin-bottom: 5px;
     text-transform: uppercase;
     letter-spacing: 2px;
     transition: 0.2s ease-in-out;
@@ -82,8 +86,8 @@
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    width: 80px;
-    height: 80px;
+    width: calc(var(--song-size) * 0.7);
+    height: calc(var(--song-size) * 0.7);
     border-radius: 50%;
     display: flex;
     align-items: center;

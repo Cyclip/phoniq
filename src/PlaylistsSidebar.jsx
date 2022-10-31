@@ -94,6 +94,17 @@ function PlaylistsSidebar(props) {
         }
     }
 
+    function handleItemClick(e) {
+        // make sure not pressing any buttons
+        /* TODO: fix this */
+        const cn = e.target.className;
+        if (cn === "playlist" || cn === "playlistInfo" || cn === "playlistImage") {
+            // select the playlist
+            props.onSelect(e.target.id);
+            props.onClose();
+        }
+    }
+
     return (
         <div className={
             "playlistsSidebar" +
@@ -122,10 +133,7 @@ function PlaylistsSidebar(props) {
                             return (
                                 <div className="playlistItem"
                                     key={index}
-                                    onClick={() => {
-                                        props.onSelect(playlist.id);
-                                        props.onClose();
-                                    }}
+                                    onClick={handleItemClick}
                                 >
                                     <div className="buttonContainer">
                                         <button className="playlistButton"
