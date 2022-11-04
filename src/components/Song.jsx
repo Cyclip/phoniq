@@ -19,14 +19,14 @@ function Song(props) {
                 }
                 {
                     props.playable ? (
-                        <PlayIcon className="songPlayIcon" />
+                        <PlayIcon fill="#ECB1BC" className="songPlayIcon" />
                     ) : null
                 }
             </div>
-            <div className="songInfo">
-                <div className="songArtist">{props.artist}</div>
-                <div className="songTitle">{props.title}</div>
-                <div className="message">{props.message}</div>
+            <div className="songInfo ellipsis">
+                <div className="songArtist ellipsis">{props.artist}</div>
+                <div className="songTitle ellipsis">{props.title}</div>
+                <div className="message ellipsis">{props.message}</div>
             </div>
         </div>
     );

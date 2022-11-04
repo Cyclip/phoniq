@@ -57,17 +57,22 @@
     margin-right: 5px;
 }
 
+.searchBarButton:disabled {color: rgba(255, 255, 255, 0.5);}
+
+.searchBarButton:disabled::after {content: "ing..";}
+
 .homePage {
     padding: 25px;
     box-sizing: border-box;
 
-    display: grid;
-    grid-template-columns: 1fr 1fr;   
+    display: flex; 
 }
 
 .homePage .section {
     height: 100%;
-    width: 100%;
+    width: 50%;
+    flex: 1;
+    flex-shrink: 0;
 }
 
 .homePage .section .sectionContent {
@@ -109,7 +114,6 @@
 .searchSongList {
     display: flex;
     flex-direction: column;
-    margin-top: 20px;
 }
 
 .songItem {
@@ -176,4 +180,46 @@
     font-weight: 100;
     font-size: 1em;
     opacity: 0.9;
+}
+
+/* refinements */
+.refinements {
+    width: 100%;
+    padding: 10px 10px;
+    box-sizing: border-box;
+    overflow: auto;
+    font-size: 0.9em;
+}
+
+.refinements .refinementsLabel {
+    font-weight: 100;
+    font-size: 1em;
+    opacity: 0.6;
+    padding: 5px 0;
+}
+
+.refinements .refinementsList {
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    /* height to 1 row */
+    max-height: 30px;
+    overflow: hidden;
+}
+
+.refinements .refinementsList .refinement {
+    padding: 5px 10px;
+    border-radius: 15px;
+    background-color: #3A1923;
+    cursor: pointer;
+    opacity: 0.5;
+    flex-shrink: 0;
+    transition: 0.2s ease;
+}
+
+.refinements .refinementsList .refinement:hover {
+    background-color: #64202c;
+    opacity: 1;
 }

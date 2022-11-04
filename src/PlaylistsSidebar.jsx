@@ -15,48 +15,13 @@ import {
 
 function PlaylistsSidebar(props) {
     const [playlists, setPlaylists] = useState([
-        {
-            name: "Playlist 1",
-            id: "1",
-            image: "https://via.placeholder.com/150",
-            numSongs: 5,
-            duration: "5h 30m",
-        },
-        {
-            name: "Playlist 2",
-            id: "2",
-            image: "https://via.placeholder.com/150",
-            numSongs: 5,
-            duration: "5h 30m",
-        },
-        {
-            name: "Playlist 3",
-            id: "3",
-            image: "https://via.placeholder.com/150",
-            numSongs: 5,
-            duration: "5h 30m",
-        },
-        {
-            name: "Playlist 4",
-            id: "4",
-            image: "https://via.placeholder.com/150",
-            numSongs: 5,
-            duration: "5h 30m",
-        },
-        {
-            name: "Playlist 5",
-            id: "5",
-            image: "https://via.placeholder.com/150",
-            numSongs: 5,
-            duration: "5h 30m",
-        },
-        {
-            name: "Playlist 6",
-            id: "6",
-            image: "https://via.placeholder.com/150",
-            numSongs: 5,
-            duration: "5h 30m",
-        },
+        // {
+        //     name: "Playlist 1",
+        //     id: "1",
+        //     image: "https://via.placeholder.com/150",
+        //     numSongs: 5,
+        //     duration: "5h 30m",
+        // },
     ]);
 
     function shiftUp(index) {
