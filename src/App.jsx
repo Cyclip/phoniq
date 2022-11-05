@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, createContext, useContext } from "react";
 import "./css/App.css";
 
 import NavigationBar from "./components/NavigationBar";
@@ -7,9 +7,38 @@ import HomePage from "./pages/HomePage";
 import PlaylistsSidebar from "./PlaylistsSidebar";
 import ErrorPage from "./pages/ErrorPage";
 
+import MusicContext from "./contexts/musicContext";
+
 function App() {
     const [page, setPage] = useState("home");
     const [playlistsOpen, setPlaylistsOpen] = useState(false);
+
+    const [currentlyPlaying, setCurrentlyPlaying] = useState({
+        title: "Song Title",
+        artist: "Artist Name",
+        image: "https://via.placeholder.com/150",
+        description: "Song description woohoo",
+        id: "song-id",
+        duration: "3:00",
+        exists: false,
+    });
+    const [currentVolume, setVolume] = useState(0.5);
+    const [isPlaying, setIsPlaying] = useState(false);
+    const [played, setPlayed] = useState(10);
+    const [duration, setDuration] = useState(300);
+
+    const musicContext = {
+        currentlyPlaying: currentlyPlaying,
+        setCurrentlyPlaying: setCurrentlyPlaying,
+        currentVolume: currentVolume,
+        setVolume: setVolume,
+        isPlaying: isPlaying,
+        setIsPlaying: setIsPlaying,
+        played: played,
+        setPlayed: setPlayed,
+        duration: duration,
+        setDuration: setDuration,
+    };
 
     // navigationButtonClick handler
     const navigationButtonClick = (page) => {
@@ -62,21 +91,23 @@ function App() {
     }
 
     return (
-        <div className="app">
-            <NavigationBar 
-                onButtonClick={navigationButtonClick}
-                activePage={page}
-                playlistsOpen={playlistsOpen}
-            />
-            {renderPage()}
-            <PlayBar />
-            <PlaylistsSidebar
-                open={playlistsOpen}
-                onButtonClick={navigationButtonClick}
-                onClose={onPlaylistsClose}
-                onSelect={onPlaylistSelect}
-            />
-        </div>
+        <MusicContext.Provider value={musicContext}>
+            <div className="app">
+                <NavigationBar 
+                    onButtonClick={navigationButtonClick}
+                    activePage={page}
+                    playlistsOpen={playlistsOpen}
+                />
+                {renderPage()}
+                <PlayBar />
+                <PlaylistsSidebar
+                    open={playlistsOpen}
+                    onButtonClick={navigationButtonClick}
+                    onClose={onPlaylistsClose}
+                    onSelect={onPlaylistSelect}
+                />
+            </div>
+        </MusicContext.Provider>
     );
 }
 

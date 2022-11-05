@@ -1,6 +1,3 @@
-use std::fs::File;
-use std::io::Write;
-
 use crate::constants;
 
 /// Search youtube based on a query

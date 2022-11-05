@@ -1,4 +1,4 @@
-import { useState, useReducer } from "react";
+import { useState, useContext } from "react";
 import "./playbar.css";
 import Song from "./Song";
 
@@ -11,25 +11,10 @@ import {
 
 import debounce from "debounce";
 
-function PlayBar(props) {
-    const [isPlaying, setIsPlaying] = useState(false);
-    const [playedPercentage, setPlayedPercentage] = useState(33);
-    const [currentTime, setCurrentTime] = useState("1:00");
-    const [duration, setDuration] = useState("3:00");
-    const [volume, setVolume] = useState(50);
-    const [song, setSong] = useState({
-        exists: false,
-        title: null,
-        artist: null,
-        image: null,
-        id: null,
+import MusicContext from "../contexts/musicContext";
 
-        // exists: true,
-        // title: "Song Title",
-        // artist: "Artist Name",
-        // image: "https://via.placeholder.com/150",
-        // id: "song-id",
-    });
+function PlayBar(props) {
+    const musicContext = useContext(MusicContext);
 
     const updatePlayedPercentage = debounce(
         debouncedUpdatePlayedPercentage,
@@ -49,12 +34,13 @@ function PlayBar(props) {
         const right = playbarPosition.right;
 
         // calculate the percentage
-        const percentage = (mousePosition - left) / (right - left) * 100;
+        const percentage = (mousePosition - left) / (right - left);
 
         // update the state
-        // make sure difference between percentage and playedPercentage is greater than 1
-        if (Math.abs(percentage - playedPercentage) > 1) {
-            setPlayedPercentage(percentage);
+        // make sure difference between percentage and playedPercentage is greater than 0.01
+        let playedPercentage = musicContext.played / musicContext.duration;
+        if (Math.abs(percentage - playedPercentage) > 0.01) {
+            musicContext.setPlayed(musicContext.duration * percentage);
         }
     }
 
@@ -71,12 +57,14 @@ function PlayBar(props) {
         const percentage = (mousePosition - bottom) / (top - bottom) * 100;
 
         // update the state
-        // this is a rapid change and it may not update immediately
-        setVolume(percentage);
+        // make sure difference between percentage and playedPercentage is greater than 0.01
+        if (Math.abs(percentage - musicContext.currentVolume) > 0.01) {
+            musicContext.setVolume(percentage / 100);
+        }
     }
 
     function onPlayPauseClick() {
-        setIsPlaying(!isPlaying);
+        musicContext.setIsPlaying(!musicContext.isPlaying);
     }
 
     function onBackwardClick() {
@@ -97,7 +85,7 @@ function PlayBar(props) {
                         </button>
                         <button className="playbarButton circled" onClick={onPlayPauseClick}>
                             {
-                                isPlaying ? <PauseIcon className="playbarIcon pause" /> : <HeartIcon className="playbarIcon" />
+                                musicContext.isPlaying ? <PauseIcon className="playbarIcon pause" /> : <HeartIcon className="playbarIcon" />
                             }
                         </button>
                         <button className="playbarButton" onClick={onForwardClick}>
@@ -106,7 +94,7 @@ function PlayBar(props) {
                     </div>
                     <div className="progress">
                         <div className="progressBarContainer pb-container">
-                            <p className="progressBarText pb-text">{currentTime}</p>
+                            <p className="progressBarText pb-text">{musicContext.played.toHHMMSS()}</p>
                             <div className="progressBarFill pb-fill"
                                 onMouseDown={updatePlayedPercentage}
                                 onMouseMove={(e) => {
@@ -116,20 +104,20 @@ function PlayBar(props) {
                                 }}
                             >
                                 <div className="progressBar" style={{
-                                    width: `${playedPercentage}%`,
+                                    width: `${musicContext.played / musicContext.duration * 100}%`,
                                 }}></div>
                                 <div className="progressBarHandle pb-handle" style={{
-                                    left: `calc(${playedPercentage}% - 10px)`,
+                                    left: `calc(${musicContext.played / musicContext.duration * 100}% - 10px)`,
                                 }}></div>
                             </div>
-                            <p className="progressBarText">{duration}</p>
+                            <p className="progressBarText">{musicContext.duration.toHHMMSS()}</p>
                         </div>
                     </div>
                 </div>
                 <div className="playbarRight">
                     <div className="volumeText pb-text">
                         <p>Volume</p>
-                        <p className="volumePerc">{Math.round(volume)}%</p>
+                        <p className="volumePerc">{Math.round(musicContext.currentVolume * 100)}%</p>
                     </div>
                     <div className="volumeBarContainer  pb-container"
                         onMouseDown={updateVolume}
@@ -141,27 +129,46 @@ function PlayBar(props) {
                     >
                         <div className="volumeBarFill pb-fill">
                             <div className="volumeBar" style={{
-                                height: `${volume}%`,
+                                height: `${musicContext.currentVolume * 100}%`,
                             }}></div>
                             <div className="volumeBarHandle pb-handle" style={{
-                                bottom: `calc(${volume}% - 10px)`,
+                                bottom: `calc(${musicContext.currentVolume * 100}% - 10px)`,
                             }}></div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div className={song.exists ? "currentlyPlaying visible" : "currentlyPlaying"}>
+            <div className={
+                musicContext.isPlaying ? "currentlyPlaying visible" : "currentlyPlaying"
+            }>
                 <Song
-                    title={song.title}
-                    artist={song.artist}
-                    image={song.image}
-                    id={song.id}
+                    title={musicContext.currentlyPlaying.title}
+                    artist={musicContext.currentlyPlaying.artist}
+                    image={musicContext.currentlyPlaying.image}
+                    id={musicContext.currentlyPlaying.id}
                 />
             </div>
         </div>
     );
 }
 
+// Number to time converter
+Number.prototype.toHHMMSS = function () {
+    var sec_num = parseInt(this.toString(), 10); // don't forget the second param
+    var hours   = Math.floor(sec_num / 3600);
+    var minutes = Math.floor((sec_num - (hours * 3600)) / 60);
+    var seconds = sec_num - (hours * 3600) - (minutes * 60);
+
+    if (hours   < 10) {hours   = "0"+hours;}
+    if (minutes < 10) {minutes = "0"+minutes;}
+    if (seconds < 10) {seconds = "0"+seconds;}
+    
+    if (hours === "00") {
+        return minutes+':'+seconds;
+    } else {
+        return hours+':'+minutes+':'+seconds;
+    }
+}
 
 export default PlayBar;

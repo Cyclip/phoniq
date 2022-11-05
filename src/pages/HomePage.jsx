@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./homepage.css";
 
 import Song from "../components/Song";
@@ -14,6 +14,8 @@ import {
 import {
     search
 } from "../mod/yt";
+
+import MusicContext from "../contexts/musicContext";
 
 import LoadingSVG from "../assets/loading.svg";
 
@@ -44,10 +46,20 @@ function HomePage() {
         },
     ]);
 
+    function onSongClick(songID) {
+        // update the MusicContext
+        const song = songs.find(song => song.id === songID);
+        
+        if (song) {
+            const musicContext = useContext(MusicContext);
+            musicContext.setCurrentlyPlaying(song);
+        }
+    }
+
     function listSearchedSongs() {
         return songs.map((song) => {
             return (
-                <div className="songItem" key={song.id}>
+                <div className="songItem" key={song.id} onClick={() => onSongClick(song.id)}>
                     <Song
                         title={song.title}
                         artist={song.artist}
@@ -74,28 +86,33 @@ function HomePage() {
 
             // disable closest button and set clear songs list
             setCurrentlySearching(true);
-            setSongs([]);
 
             // wait for search to finish
-            search(query).then((data) => {
-                console.log("Search results:", data);
-                const vidInfo = data[0];
-                const refinements = data[1];
-                setSongs(vidInfo);
-                setRefinements(refinements);
-
-                // re-enable button
-                setCurrentlySearching(false);
-            }).catch((err) => {
-                console.log(err);
-
-                // re-enable button
-                setCurrentlySearching(false);
-            });
+            searchQuery(query);
         } else {
             console.log("Query too short");
             setSongs([]);
         }
+    }
+
+    function searchQuery(query) {
+        setSongs([]);
+        setRefinements([]);
+        search(query).then((data) => {
+            console.log("Search results:", data);
+            const vidInfo = data[0];
+            const refinements = data[1];
+            setSongs(vidInfo);
+            setRefinements(refinements);
+
+            // re-enable button
+            setCurrentlySearching(false);
+        }).catch((err) => {
+            console.log(err);
+
+            // re-enable button
+            setCurrentlySearching(false);
+        });
     }
 
     function renderRefinements() {
@@ -106,7 +123,7 @@ function HomePage() {
                     {
                         refinements.map((refinement) => {
                             return (
-                                <p className="refinement" key={refinement}>{refinement}</p>
+                                <p className="refinement" key={refinement} onClick={searchQuery(refinement)}>{refinement}</p>
                             );
                         })
                     }
