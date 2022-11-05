@@ -156,7 +156,7 @@ button {
 }
 
 .playbar .playbarCenter .progress .progressBarContainer .progressBarFill .progressBar {
-    width: 10%;
+    width: 0%;
     height: 100%;
     background-color: #B2768B;
     border-radius: 5px;
@@ -167,7 +167,7 @@ button {
 
 .playbar .playbarCenter .progress .progressBarContainer .progressBarFill .progressBarHandle {
     position: absolute;
-    left: calc(10% - 10px);
+    left: calc(0% - 10px);
     top: -4px;
 }
 

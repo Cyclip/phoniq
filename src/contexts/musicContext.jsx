@@ -5,6 +5,8 @@ import { createContext } from "react";
 const MusicContext = createContext({
     currentlyPlaying: null,
     setCurrentlyPlaying: () => {},
+    songQueue: [],
+    setSongQueue: () => {},
     currentVolume: 0.5,
     setVolume: () => {},
     isPlaying: false,

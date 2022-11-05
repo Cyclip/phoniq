@@ -10,6 +10,7 @@ import {
 import {
     EllipsisVerticalIcon,
 } from "@heroicons/react/24/solid";
+import LoadingSVG from "../assets/loading.svg";
 
 import {
     search
@@ -17,9 +18,8 @@ import {
 
 import MusicContext from "../contexts/musicContext";
 
-import LoadingSVG from "../assets/loading.svg";
-
 function HomePage() {
+    const musicContext = useContext(MusicContext);
     const [searchBarValue, setSearchBarValue] = useState("");
     const [currentlySearching, setCurrentlySearching] = useState(false); // also disables button
     const [refinements, setRefinements] = useState([]);
@@ -46,20 +46,51 @@ function HomePage() {
         },
     ]);
 
+    function durationToSeconds(duration) {
+        // format HH:MM:SS
+        let seconds = 0;
+        let minutes = 0;
+        let hours = 0;
+
+        if (duration.includes(":")) {
+            let split = duration.split(":");
+            if (split.length === 3) {
+                hours = parseInt(split[0]);
+                minutes = parseInt(split[1]);
+                seconds = parseInt(split[2]);
+            } else if (split.length === 2) {
+                minutes = parseInt(split[0]);
+                seconds = parseInt(split[1]);
+            } else {
+                seconds = parseInt(split[0]);
+            }
+        } else {
+            seconds = parseInt(duration);
+        }
+
+        return seconds + (minutes * 60) + (hours * 60 * 60);
+    }
+
     function onSongClick(songID) {
         // update the MusicContext
+        console.log("Song clicked: " + songID);
         const song = songs.find(song => song.id === songID);
         
         if (song) {
-            const musicContext = useContext(MusicContext);
             musicContext.setCurrentlyPlaying(song);
+            musicContext.setIsPlaying(true);
+            musicContext.setSongQueue([]);
+            musicContext.setPlayed(0);
+            musicContext.setDuration(durationToSeconds(song.duration));
+            console.log(`Playing ${song.title} by ${song.artist}`);
+            console.log(musicContext);
         }
     }
 
     function listSearchedSongs() {
         return songs.map((song) => {
             return (
-                <div className="songItem" key={song.id} onClick={() => onSongClick(song.id)}>
+                <div className="songItem" key={song.id}>
                     <Song
                         title={song.title}
                         artist={song.artist}
@@ -68,6 +99,8 @@ function HomePage() {
                         id={song.id}
                         duration={song.duration}
                         playable={true}
+                        onImageClick={() => onSongClick(song.id)}
+                        official={song.official}
                     />
                     <button className="songItemButton">
                         <EllipsisVerticalIcon className="icon" />
@@ -79,23 +112,26 @@ function HomePage() {
 
     function onSearchClick(e) {
         const query = searchBarValue;
+        console.log("[SC] Searching for " + query);
         
         // query must be at least 3 characters long
         if (query.length >= 3) {
-            console.log("Searching for " + query);
-
-            // disable closest button and set clear songs list
-            setCurrentlySearching(true);
 
             // wait for search to finish
             searchQuery(query);
         } else {
             console.log("Query too short");
-            setSongs([]);
         }
     }
 
     function searchQuery(query) {
+        console.log("Searching for " + query);
+        if (currentlySearching) {
+            console.log("Already searching");
+            return;
+        }
+
+        setCurrentlySearching(true);
         setSongs([]);
         setRefinements([]);
         search(query).then((data) => {
@@ -123,7 +159,11 @@ function HomePage() {
                     {
                         refinements.map((refinement) => {
                             return (
-                                <p className="refinement" key={refinement} onClick={searchQuery(refinement)}>{refinement}</p>
+                                <p className="refinement" key={refinement} onClick={() => {
+                                    console.log("Refinement clicked: " + refinement);
+                                    setSearchBarValue(refinement);
+                                    searchQuery(refinement);
+                                }}>{refinement}</p>
                             );
                         })
                     }
@@ -211,6 +251,7 @@ function HomePage() {
                                             id={song.id}
                                             duration={song.duration}
                                             playable={true}
+                                            official={song.official}
                                         />
                                         <button className="songItemButton">
                                             <EllipsisVerticalIcon className="icon" />

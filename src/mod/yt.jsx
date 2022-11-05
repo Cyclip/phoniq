@@ -10,7 +10,6 @@ export const search = async (query) => {
 
 function parseSearchJson(json) {
     let data = JSON.parse(json);
-    console.log("Parsing", data);
 
     // const isDefined = (element) => element == undefined;
 
@@ -30,7 +29,7 @@ function parseSearchJson(json) {
             let isOfficialArtist = false;
             if (badges != undefined) {
                 for (let j = 0; j < badges.length; j++) {
-                    if (badges[j]["metadataBadgeRenderer"]["icon"] == "OFFICIAL_ARTIST_BADGE") {
+                    if (badges[j]["metadataBadgeRenderer"]["icon"]["iconType"] == "OFFICIAL_ARTIST_BADGE") {
                         isOfficialArtist = true;
                         break;
                     }
@@ -38,21 +37,21 @@ function parseSearchJson(json) {
             }
 
             let idValue = vid['videoId'];
-            console.log(`id: ${idValue}`);
+            // console.log(`id: ${idValue}`);
             let imageValue = vid['thumbnail']['thumbnails'][0]['url'];
-            console.log(`image: ${imageValue}`);
+            // console.log(`image: ${imageValue}`);
             let titleValue = vid['title']['runs'][0]['text'];
-            console.log(`title: ${titleValue}`);
+            // console.log(`title: ${titleValue}`);
             let urlValue = vid['navigationEndpoint']['commandMetadata']['webCommandMetadata']['url'] || "";
-            console.log(`url: ${urlValue}`);
+            // console.log(`url: ${urlValue}`);
             let artistValue = vid['ownerText']['runs'][0]['text'];
-            console.log(`artist: ${artistValue}`);
+            // console.log(`artist: ${artistValue}`);
             let durationValue = vid['lengthText']['simpleText'] || "Missing";
-            console.log(`duration: ${durationValue}`);
+            // console.log(`duration: ${durationValue}`);
             let descriptionValue = vid["detailedMetadataSnippets"][0]["snippetText"]["runs"][0]["text"] || "";
-            console.log(`description: ${descriptionValue}`);
+            // console.log(`description: ${descriptionValue}`);
             let officialValue = isOfficialArtist || false;
-            console.log(`official: ${officialValue}`);
+            // console.log(`official: ${officialValue}`);
 
             rv.push({
                 id: idValue,

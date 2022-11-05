@@ -22,14 +22,17 @@ function App() {
         duration: "3:00",
         exists: false,
     });
+    const [songQueue, setSongQueue] = useState([]);
     const [currentVolume, setVolume] = useState(0.5);
     const [isPlaying, setIsPlaying] = useState(false);
-    const [played, setPlayed] = useState(10);
-    const [duration, setDuration] = useState(300);
+    const [played, setPlayed] = useState(0);
+    const [duration, setDuration] = useState(0);
 
     const musicContext = {
         currentlyPlaying: currentlyPlaying,
         setCurrentlyPlaying: setCurrentlyPlaying,
+        songQueue: songQueue,
+        setSongQueue: setSongQueue,
         currentVolume: currentVolume,
         setVolume: setVolume,
         isPlaying: isPlaying,

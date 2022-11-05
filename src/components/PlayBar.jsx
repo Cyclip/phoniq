@@ -64,7 +64,9 @@ function PlayBar(props) {
     }
 
     function onPlayPauseClick() {
-        musicContext.setIsPlaying(!musicContext.isPlaying);
+        if (musicContext.currentlyPlaying.exists) {
+            musicContext.setIsPlaying(!musicContext.isPlaying);
+        }
     }
 
     function onBackwardClick() {
@@ -140,12 +142,13 @@ function PlayBar(props) {
             </div>
 
             <div className={
-                musicContext.isPlaying ? "currentlyPlaying visible" : "currentlyPlaying"
+                musicContext.isPlaying && musicContext.currentlyPlaying.exists ? "currentlyPlaying visible" : "currentlyPlaying"
             }>
                 <Song
                     title={musicContext.currentlyPlaying.title}
-                    artist={musicContext.currentlyPlaying.artist}
+                    artist="NOW PLAYING"
                     image={musicContext.currentlyPlaying.image}
+                    message={"By " + musicContext.currentlyPlaying.artist}
                     id={musicContext.currentlyPlaying.id}
                 />
             </div>

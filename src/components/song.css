@@ -19,6 +19,8 @@
     background-color: #D19EA7;
     flex-shrink: 0;
     position: relative;
+    display: flex;
+    justify-content: center;
     transition: 0.2s ease-in-out;
 }
 
@@ -27,8 +29,8 @@
     bottom: 0;
     right: 0;
     padding: 5px 10px;
-    background-color: #803C54;
-    opacity: 0.5;
+    background-color: #65434f;
+    opacity: 0.8;
     color: white;
     font-size: 0.8em;
     font-weight: 600;
@@ -51,8 +53,7 @@
 }
 
 .song .songInfo .songArtist {
-    color: white;
-    opacity: 0.6;
+    color: rgba(255, 255, 255, 0.6);
     font-size: 0.8rem;
     font-weight: 100;
     text-transform: uppercase;
@@ -67,12 +68,16 @@
     transition: 0.2s ease-in-out;
 }
 
+.song .songInfo .songTitle.playing {
+    color: #D19EA7;
+}
+
 .song .songInfo .message {
     margin-top: auto;
     color: white;
     font-weight: 100;
     font-size: 1rem;
-    width: 50%;
+    width: 100%;
     opacity: 0.6;
 }
 
@@ -104,4 +109,25 @@
 
 .song.playable .songImage:hover .songPlayIcon {
     opacity: 1;
+}
+
+.song.official .songInfo .songArtist {
+    font-weight: 400;
+}
+
+.officialSong {
+    background-color: #5b283a8d;
+    color: rgba(255, 255, 255, 0.516);
+    border-radius: 10px;
+    padding: 0 5px;
+    margin: 0 5px;
+}
+
+/* playing states */
+.song .songInfo.playing div {
+    text-shadow: 0 0 2px white;
+}
+
+.song .songInfo.not-playing {
+    filter: brightness(0.5);
 }
